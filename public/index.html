@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Relay Room</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Relay Room home"><span class="brand-mark">↗</span> Relay Room</a>
+        <div class="status"><span id="status-dot" class="dot offline"></span><span id="status-text">Connecting…</span></div>
+      </header>
+
+      <section class="hero">
+        <p class="eyebrow">REAL-TIME WEB SOCKETS</p>
+        <h1>One room.<br /><em>Two screens.</em></h1>
+        <p class="intro">Open this page on two devices, join the same room, and move messages or structured data between them instantly.</p>
+      </section>
+
+      <section class="card setup-card">
+        <div class="field-group"><label for="name">Your name</label><input id="name" maxlength="24" value="Guest" /></div>
+        <div class="field-group room-field"><label for="room">Room code</label><input id="room" maxlength="32" value="studio" /></div>
+        <button id="join" class="button primary">Join room <span>↗</span></button>
+        <div class="room-meta"><span id="room-label">Not in a room</span><span class="people"><span class="people-icon">♧</span><b id="count">0</b> connected</span></div>
+      </section>
+
+      <section class="workspace">
+        <div class="card messages-card">
+          <div class="card-head"><div><p class="eyebrow">LIVE FEED</p><h2>Messages</h2></div><span class="live-pill">● LIVE</span></div>
+          <div id="feed" class="feed"><div class="empty-state"><span>✦</span><p>Your shared feed is empty.</p><small>Send a message to see it appear on both screens.</small></div></div>
+          <form id="message-form" class="composer"><input id="message" autocomplete="off" placeholder="Write a message…" maxlength="2000" /><button class="send-button" aria-label="Send message">↑</button></form>
+        </div>
+
+        <div class="card data-card">
+          <div class="card-head"><div><p class="eyebrow">DATA TRANSFER</p><h2>Send JSON</h2></div><span class="bracket">{ }</span></div>
+          <p class="muted">Send structured data to every browser in this room.</p>
+          <textarea id="json-input" spellcheck="false">{
+  "from": "my browser",
+  "value": 42
+}</textarea>
+          <button id="send-json" class="button dark">Send data <span>↗</span></button>
+          <p id="json-result" class="validation" aria-live="polite"></p>
+        </div>
+      </section>
+      <footer>Built for quick experiments across devices <span>·</span> WebSocket + Render</footer>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "live-socket-room",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A tiny real-time room for sharing messages and JSON between browsers.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  }
+}
