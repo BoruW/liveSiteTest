@@ -1,5 +1,6 @@
 const $ = (id) => document.getElementById(id);
 const feed = $('feed');
+const EMOTICONS = [':)', 'XD', 'o_o', '(͡° ͜ʖ ͡°)', '(๑ˇεˇ๑)', 'ʕ •ᴥ•ʔ', ":'(", 'D:'];
 let socket;
 let joined = false;
 
@@ -42,7 +43,21 @@ function addMessage(sender, content, sentAt, isData = false) {
 function escapeHtml(text) { return text.replace(/[&<>'"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 
 $('join').addEventListener('click', joinRoom);
-$('message-form').addEventListener('submit', (event) => { event.preventDefault(); const input = $('message'); if (!input.value.trim()) return; send({ type:'message', text:input.value }); input.value = ''; input.focus(); });
+$('emoticon-options').addEventListener('click', (event) => {
+  const button = event.target.closest('[data-emoticon]');
+  if (!button) return;
+  $('message').value = button.dataset.emoticon;
+  document.querySelectorAll('.emoticon-option').forEach((option) => option.classList.toggle('selected', option === button));
+  $('message').focus();
+});
+$('message-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const input = $('message');
+  if (!EMOTICONS.includes(input.value)) return;
+  send({ type:'message', text:input.value });
+  input.value = '';
+  document.querySelectorAll('.emoticon-option').forEach((option) => option.classList.remove('selected'));
+});
 $('send-json').addEventListener('click', () => { const result = $('json-result'); try { const payload = JSON.parse($('json-input').value); send({ type:'data', payload }); result.className = 'validation good'; result.textContent = 'Sent to the room.'; } catch { result.className = 'validation bad'; result.textContent = 'That JSON is not valid yet.'; } });
 $('name').addEventListener('change', joinRoom); $('room').addEventListener('change', joinRoom);
 connect();

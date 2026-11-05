@@ -30,7 +30,22 @@
         <div class="card messages-card">
           <div class="card-head"><div><p class="eyebrow">LIVE FEED</p><h2>Messages</h2></div><span class="live-pill">● LIVE</span></div>
           <div id="feed" class="feed"><div class="empty-state"><span>✦</span><p>Your shared feed is empty.</p><small>Send a message to see it appear on both screens.</small></div></div>
-          <form id="message-form" class="composer"><input id="message" autocomplete="off" placeholder="Write a message…" maxlength="2000" /><button class="send-button" aria-label="Send message">↑</button></form>
+          <form id="message-form" class="composer">
+            <div class="emoticon-picker" aria-label="Choose an emoticon">
+              <span class="picker-label">Choose an emoticon</span>
+              <div class="emoticon-options" id="emoticon-options">
+                <button type="button" class="emoticon-option" data-emoticon=":)">:)</button>
+                <button type="button" class="emoticon-option" data-emoticon="XD">XD</button>
+                <button type="button" class="emoticon-option" data-emoticon="o_o">o_o</button>
+                <button type="button" class="emoticon-option" data-emoticon="(͡° ͜ʖ ͡°)">(͡° ͜ʖ ͡°)</button>
+                <button type="button" class="emoticon-option" data-emoticon="(๑ˇεˇ๑)">(๑ˇεˇ๑)</button>
+                <button type="button" class="emoticon-option" data-emoticon="ʕ •ᴥ•ʔ">ʕ •ᴥ•ʔ</button>
+                <button type="button" class="emoticon-option" data-emoticon=":'('>:&#39;(</button>
+                <button type="button" class="emoticon-option" data-emoticon="D:">D:</button>
+              </div>
+            </div>
+            <div class="composer-row"><input id="message" autocomplete="off" placeholder="Choose an emoticon…" readonly aria-label="Selected emoticon" /><button class="send-button" aria-label="Send selected emoticon">↑</button></div>
+          </form>
         </div>
 
         <div class="card data-card">

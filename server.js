@@ -9,6 +9,7 @@ const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 const PORT = process.env.PORT || 3000;
 const clients = new Map();
+const EMOTICONS = new Set([':)', 'XD', 'o_o', '(͡° ͜ʖ ͡°)', '(๑ˇεˇ๑)', 'ʕ •ᴥ•ʔ', ":'(", 'D:']);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/health', (_req, res) => res.json({ ok: true, clients: clients.size }));
@@ -59,7 +60,7 @@ wss.on('connection', (socket) => {
 
     if (message.type === 'message') {
       const text = String(message.text || '').trim().slice(0, 2000);
-      if (!text) return;
+      if (!EMOTICONS.has(text)) return;
       broadcast(client.room, {
         type: 'message',
         id: crypto.randomUUID(),
