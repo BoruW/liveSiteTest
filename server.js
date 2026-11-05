@@ -71,17 +71,6 @@ wss.on('connection', (socket) => {
       return;
     }
 
-    if (message.type === 'data') {
-      const payload = message.payload;
-      if (payload === undefined) return;
-      broadcast(client.room, {
-        type: 'data',
-        id: crypto.randomUUID(),
-        sender: client.name,
-        payload,
-        sentAt: new Date().toISOString()
-      });
-    }
   });
 
   socket.on('close', () => {

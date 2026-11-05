@@ -15,8 +15,8 @@
 
       <section class="hero">
         <p class="eyebrow">REAL-TIME WEB SOCKETS</p>
-        <h1>One room.<br /><em>Two screens.</em></h1>
-        <p class="intro">Open this page on two devices, join the same room, and move messages or structured data between them instantly.</p>
+        <h1>Emote one side.<br /><em>Emote out the other!.</em></h1>
+        <p class="intro">Open this page on two devices, join the same room, and share a little expression between them instantly.</p>
       </section>
 
       <section class="card setup-card">
@@ -46,17 +46,6 @@
             </div>
             <div class="composer-row"><input id="message" autocomplete="off" placeholder="Choose an emoticon…" readonly aria-label="Selected emoticon" /><button class="send-button" aria-label="Send selected emoticon">↑</button></div>
           </form>
-        </div>
-
-        <div class="card data-card">
-          <div class="card-head"><div><p class="eyebrow">DATA TRANSFER</p><h2>Send JSON</h2></div><span class="bracket">{ }</span></div>
-          <p class="muted">Send structured data to every browser in this room.</p>
-          <textarea id="json-input" spellcheck="false">{
-  "from": "my browser",
-  "value": 42
-}</textarea>
-          <button id="send-json" class="button dark">Send data <span>↗</span></button>
-          <p id="json-result" class="validation" aria-live="polite"></p>
         </div>
       </section>
       <footer>Built for quick experiments across devices <span>·</span> WebSocket + Render</footer>

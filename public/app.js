@@ -27,17 +27,15 @@ function handle(message) {
   }
   if (message.type === 'presence') { $('count').textContent = message.count; return; }
   if (message.type === 'message') addMessage(message.sender, message.text, message.sentAt);
-  if (message.type === 'data') addMessage(message.sender, message.payload, message.sentAt, true);
 }
 
-function addMessage(sender, content, sentAt, isData = false) {
+function addMessage(sender, content, sentAt) {
   feed.querySelector('.empty-state')?.remove();
-  const item = document.createElement('article'); item.className = `message${isData ? ' data-message' : ''}`;
+  const item = document.createElement('article'); item.className = 'message';
   const time = new Date(sentAt).toLocaleTimeString([], { hour:'numeric', minute:'2-digit' });
-  const top = document.createElement('div'); top.className = 'message-top'; top.innerHTML = `<span>${escapeHtml(sender)}${isData ? ' · JSON' : ''}</span><time>${time}</time>`;
+  const top = document.createElement('div'); top.className = 'message-top'; top.innerHTML = `<span>${escapeHtml(sender)}</span><time>${time}</time>`;
   item.append(top);
-  if (isData) { const pre = document.createElement('pre'); pre.textContent = JSON.stringify(content, null, 2); item.append(pre); }
-  else { const p = document.createElement('p'); p.textContent = content; item.append(p); }
+  const p = document.createElement('p'); p.textContent = content; item.append(p);
   feed.append(item); feed.scrollTop = feed.scrollHeight;
 }
 function escapeHtml(text) { return text.replace(/[&<>'"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
@@ -58,6 +56,5 @@ $('message-form').addEventListener('submit', (event) => {
   input.value = '';
   document.querySelectorAll('.emoticon-option').forEach((option) => option.classList.remove('selected'));
 });
-$('send-json').addEventListener('click', () => { const result = $('json-result'); try { const payload = JSON.parse($('json-input').value); send({ type:'data', payload }); result.className = 'validation good'; result.textContent = 'Sent to the room.'; } catch { result.className = 'validation bad'; result.textContent = 'That JSON is not valid yet.'; } });
 $('name').addEventListener('change', joinRoom); $('room').addEventListener('change', joinRoom);
 connect();
